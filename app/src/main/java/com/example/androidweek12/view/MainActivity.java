@@ -13,7 +13,7 @@ import com.example.androidweek12.viewModel.CityViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    CityViewModel model;
+    CityViewModel model = new CityViewModel();
     ActivityMainBinding binding;
 
     @Override
@@ -26,15 +26,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        model.getCityData().observe(this, new Observer<City>() {
-            @Override
-            public void onChanged(City city) {
-                binding.cityImage.setImageDrawable(
-                        ResourcesCompat.getDrawable(getResources(), city.img, getApplicationContext().getTheme())
-                );
-                binding.cityNameTV.setText(city.name);
-                binding.cityPopulationTV.setText(String.valueOf(city.population));
-            }
+        model.getCityData().observe(this, city -> {
+            binding.cityImage.setImageDrawable(
+                    ResourcesCompat.getDrawable(getResources(), city.img, getApplicationContext().getTheme())
+            );
+            binding.cityNameTV.setText(city.name);
+            binding.cityPopulationTV.setText(String.valueOf(city.population));
         });
     }
 }

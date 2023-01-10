@@ -13,12 +13,14 @@ import com.example.androidweek12.model.CityDataProvider;
 import java.util.ArrayList;
 
 public class CityViewModel extends ViewModel {
-    MutableLiveData<City> cityData;
+    final Handler handler = new Handler(Looper.getMainLooper());
+    MutableLiveData<City> cityData = new MutableLiveData<>();
     ArrayList<City> cities = new CityDataProvider().getCities();
     int currentIndex = 0;
-    long delay = 2000L;
+    long delay = 4000L;
 
     public CityViewModel(){
+        cityData.setValue(cities.get(0));
         this.loop();
     }
 
@@ -27,7 +29,7 @@ public class CityViewModel extends ViewModel {
     }
 
     private void loop(){
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 updateCity();

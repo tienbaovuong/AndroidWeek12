@@ -3,7 +3,7 @@ import com.example.androidweek12.R;
 import java.util.ArrayList;
 
 public class CityDataProvider {
-    private ArrayList<City> cities;
+    private ArrayList<City> cities = new ArrayList<>();
 
     public CityDataProvider(){
         cities.add(new City("Bangkok", R.drawable.bangkok, 10_000_000));
